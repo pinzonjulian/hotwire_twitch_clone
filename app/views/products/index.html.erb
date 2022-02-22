@@ -1,4 +1,7 @@
 <%= turbo_frame_tag "live_stream_products" do %>
+  <div class="flex justify-center">
+    <%= render partial: "shared/pagination", locals: { pagy: @pagy} %>
+  </div>
   <div class="mt-4 grid grid-cols-3 gap-4 mb-8">
     <%= render @products %>
   </div>

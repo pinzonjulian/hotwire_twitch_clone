@@ -1,0 +1,22 @@
+<%#
+  This template is i18n-ready: if you don't use i18n, then you can replace the pagy_t
+  calls with the actual strings ("&lsaquo; Prev", "Next &rsaquo;", "&hellip;").
+  The link variable is set to a proc that returns the link tag.
+  Usage: link.call( page_number [, text [, extra_attributes_string ]])
+-%>
+<% link = pagy_link_proc(pagy) -%>
+<% base_classes = "rounded-full text-sm font-bold text-gray-700 h-6 w-6 bg-gray-100 flex items-center justify-center" %>
+<%#                            -%><nav aria-label="pager" class="flex gap-4" role="navigation">
+  <% if pagy.prev                -%>  <span class="<%= base_classes %>"><%== link.call(pagy.prev, "<", 'aria-label="previous"') %></span>
+  <% else                        -%>  <span class="<%= base_classes %>"><</span>
+  <% end                         -%>
+  <% pagy.series.each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36] -%>
+    <%   if    item.is_a?(Integer) -%>  <span class="<%= base_classes %> page"><%== link.call(item) %></span>
+    <%   elsif item.is_a?(String)  -%>  <span class="<%= base_classes %> page current"><%= item %></span>
+    <%   elsif item == :gap        -%>  <span class="<%= base_classes %> page gap"><%== pagy_t('pagy.nav.gap') %></span>
+    <%   end                       -%>
+  <% end                         -%>
+  <% if pagy.next                -%>  <span class="<%= base_classes %>"><%== link.call(pagy.next, ">", 'aria-label="next"') %></span>
+  <% else                        -%>  <span class="<%= base_classes %> disabled">></span>
+  <% end                         -%>
+<%#                            -%></nav>
