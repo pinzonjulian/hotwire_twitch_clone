@@ -81,7 +81,7 @@ live_streams.each do |data|
            when "cooking"
              Faker::Restaurant.name
            when "gaming"
-             "#{Faker::Computer.platform} #{Faker::Hipster.words} #{Faker::Hacker.verb}"
+             "#{Faker::Computer.platform} #{Faker::Hipster.word} #{Faker::Hacker.verb}"
            else
              raise data[:theme]
            end
