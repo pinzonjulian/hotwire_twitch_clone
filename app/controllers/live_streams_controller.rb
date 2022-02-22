@@ -1,5 +1,6 @@
 class LiveStreamsController < ApplicationController
   before_action :set_live_stream, only: %i[ show edit update destroy ]
+  layout :define_layout
 
   # GET /live_streams or /live_streams.json
   def index
@@ -8,6 +9,7 @@ class LiveStreamsController < ApplicationController
 
   # GET /live_streams/1 or /live_streams/1.json
   def show
+    @recommended_live_streams = LiveStream.all
   end
 
   # GET /live_streams/new
@@ -66,5 +68,14 @@ class LiveStreamsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def live_stream_params
       params.require(:live_stream).permit(:name, :url)
+    end
+
+    def define_layout
+      case action_name
+      when "show"
+        "live_stream"
+      else
+        "application"
+      end
     end
 end

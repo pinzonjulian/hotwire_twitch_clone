@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: "live_streams#index"
+
   resources :messages
   resources :products
   resources :live_streams

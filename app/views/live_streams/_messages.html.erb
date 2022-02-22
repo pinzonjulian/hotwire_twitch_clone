@@ -1,0 +1,10 @@
+<div class=" w-1/5 h-full max-h-screen overflow-y-auto flex flex-col gap flex-grow relative">
+  <div class="flex-grow flex flex-col gap-8 p-4 pb-36">
+    <% @live_stream.messages.each do |message| %>
+      <div class="bg-white shadow-md rounded w-4/5 px-4 py-2"><%= message.body %></div>
+    <% end %>
+  </div>
+  <div class="h-24 bg-gray-100 fixed w-1/5 bottom-0 right-0">
+    fdsafdas
+  </div>
+</div>
