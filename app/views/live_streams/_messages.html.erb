@@ -1,10 +1,13 @@
 <div class=" w-1/5 h-full max-h-screen overflow-y-auto flex flex-col gap flex-grow relative">
-  <div class="flex-grow flex flex-col gap-8 p-4 pb-36">
-    <% @live_stream.messages.each do |message| %>
-      <div class="bg-white shadow-md rounded w-4/5 px-4 py-2"><%= message.body %></div>
-    <% end %>
+  <div id="messages"
+    class="flex-grow flex flex-col gap-8 p-4 pb-36">
+    <%= render @live_stream.messages %>
   </div>
-  <div class="h-24 bg-gray-100 fixed w-1/5 bottom-0 right-0">
-    fdsafdas
+  <div class="h-24 bg-gray-100 fixed w-1/5 bottom-0 right-0 p-4">
+    <%= turbo_stream_from @live_stream %>
+    <%= form_with(model: [@live_stream, @live_stream.messages.build]) do |form| %>
+      <%= form.text_field :body, class: "border border-gray" %>
+      <%= form.button %>
+    <% end %>
   </div>
 </div>

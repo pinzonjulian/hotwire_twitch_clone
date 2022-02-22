@@ -21,14 +21,17 @@ class MessagesController < ApplicationController
 
   # POST /messages or /messages.json
   def create
-    @message = Message.new(message_params)
+    @live_stream = LiveStream.find(params[:live_stream_id])
+    @message = @live_stream.messages.build(message_params)
 
     respond_to do |format|
       if @message.save
+        format.turbo_stream
         format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

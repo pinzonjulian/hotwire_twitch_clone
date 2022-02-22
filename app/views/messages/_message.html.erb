@@ -1,17 +1,1 @@
-<div id="<%= dom_id message %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Body:</strong>
-    <%= message.body %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Live stream:</strong>
-    <%= message.live_stream_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this message", message, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this message', edit_message_path(message), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<div class="bg-white shadow-md rounded w-4/5 px-4 py-2"><%= message.body %></div>
