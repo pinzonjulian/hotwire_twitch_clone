@@ -4,7 +4,6 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @live_stream = LiveStream.find(params[:live_stream_id])
-    @products = @live_stream.products.limit(3)
     @pagy, @products = pagy( @live_stream.products, items: 3)
   end
 
