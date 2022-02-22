@@ -1,17 +1,4 @@
-<div id="<%= dom_id product %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= product.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Live stream:</strong>
-    <%= product.live_stream_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this product", product, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this product', edit_product_path(product), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<article class="shadow-md hover:shadow transition w-40 place-self-center p-4 rounded">
+  <%= image_tag("#{product.category}_#{rand(1..9)}.webp", class: "object-contain h-32 mx-auto") %>
+  <p class="font-bold text-gray-700 text-sm mt-4"><%= product.name %></p>
+</article>

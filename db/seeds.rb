@@ -4,19 +4,19 @@ live_streams = [
   { name: "Daut vs The Viper", url: "https://www.youtube.com/embed/XGVXkdnLJqg", theme: :gaming },
   { name: "Winning... again...", url: "https://www.youtube.com/embed/7IHedKtcSW4", theme: :gaming },
   { name: "Cuting thorugh the black forrest", url: "https://www.youtube.com/embed/9jB34bMG2VA", theme: :gaming },
-  { name: "Carbonara tradizizonale", url: "https://www.youtube.com/embed/4UTrEpVKhKM", theme: :cooking},
-  { name: "96yo granny still cooking traditional italian", url: "https://www.youtube.com/embed/RnhlpQlYBwo", theme: :cooking},
-  { name: "Ravioli, Ravioli", url: "https://www.youtube.com/embed/Hzs-0vLIQxs", theme: :cooking},
-  { name: "Garlic, the cure for everything", url: "https://www.youtube.com/embed/bJCKetu94XY", theme: :cooking},
-  { name: "Cycling through a blizzard in Amsterdam", url: "https://www.youtube.com/embed/SfsCniN7Nsc", theme: :climate},
-  { name: "Dutch bikes are better", url: "https://www.youtube.com/embed/Evy2EgoveuE", theme: :climate},
-  { name: "American cities, pt 1", url: "https://www.youtube.com/embed/GRB6rSDW5i4", theme: :climate},
-  { name: "Safer sidewalks", url: "https://www.youtube.com/embed/oOttvpjJvAo", theme: :climate},
-  { name: "Suburbs are bleeding america dry", url: "https://www.youtube.com/embed/cO6txCZpbsQ", theme: :climate},
-  { name: "Fast fashion is garbage", url: "https://www.youtube.com/embed/f_hErrx9Ubk", theme: :climate},
-  { name: "How the auto industry carjacked america", url: "https://www.youtube.com/embed/PO4k2Svd92s", theme: :climate},
-  { name: "Let's break up with gas stoves", url: "https://www.youtube.com/embed/DXu1t6gs1S4", theme: :climate},
-  { name: "Exxon lobbyists caught on camera", url: "https://www.youtube.com/embed/sI-1YNAmWlk", theme: :climate},
+  { name: "Carbonara tradizizonale", url: "https://www.youtube.com/embed/4UTrEpVKhKM", theme: :cooking },
+  { name: "96yo granny still cooking traditional italian", url: "https://www.youtube.com/embed/RnhlpQlYBwo", theme: :cooking },
+  { name: "Ravioli, Ravioli", url: "https://www.youtube.com/embed/Hzs-0vLIQxs", theme: :cooking },
+  { name: "Garlic, the cure for everything", url: "https://www.youtube.com/embed/bJCKetu94XY", theme: :cooking },
+  { name: "Cycling through a blizzard in Amsterdam", url: "https://www.youtube.com/embed/SfsCniN7Nsc", theme: :climate },
+  { name: "Dutch bikes are better", url: "https://www.youtube.com/embed/Evy2EgoveuE", theme: :climate },
+  { name: "American cities, pt 1", url: "https://www.youtube.com/embed/GRB6rSDW5i4", theme: :climate },
+  { name: "Safer sidewalks", url: "https://www.youtube.com/embed/oOttvpjJvAo", theme: :climate },
+  { name: "Suburbs are bleeding america dry", url: "https://www.youtube.com/embed/cO6txCZpbsQ", theme: :climate },
+  { name: "Fast fashion is garbage", url: "https://www.youtube.com/embed/f_hErrx9Ubk", theme: :climate },
+  { name: "How the auto industry carjacked america", url: "https://www.youtube.com/embed/PO4k2Svd92s", theme: :climate },
+  { name: "Let's break up with gas stoves", url: "https://www.youtube.com/embed/DXu1t6gs1S4", theme: :climate },
+  { name: "Exxon lobbyists caught on camera", url: "https://www.youtube.com/embed/sI-1YNAmWlk", theme: :climate },
 ]
 gaming_messages = [
   "gg",
@@ -70,8 +70,21 @@ messages = {
 
 live_streams.each do |data|
   live_stream = LiveStream.create!(name: data[:name], url: data[:url])
-  [3,4,5].sample.times do
+  [3, 4, 5].sample.times do
     body = messages[data[:theme]].sample
     live_stream.messages.create!(body: body)
+  end
+  (1..9).to_a.each do
+    name = case data[:theme].to_s
+           when "climate"
+             Faker::Book.title
+           when "cooking"
+             Faker::Restaurant.name
+           when "gaming"
+             "#{Faker::Computer.platform} #{Faker::Hipster.words} #{Faker::Hacker.verb}"
+           else
+             raise data[:theme]
+           end
+    live_stream.products.create! name: name, category: data[:theme].to_s
   end
 end

@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @live_stream = LiveStream.find(params[:live_stream_id])
+    @products = @live_stream.products.limit(3)
   end
 
   # GET /products/1 or /products/1.json
