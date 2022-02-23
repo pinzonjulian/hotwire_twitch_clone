@@ -6,7 +6,7 @@
   <div class="h-24 bg-gray-200 fixed w-1/5 bottom-0 right-0 p-4">
     <%= turbo_stream_from @live_stream %>
     <%= form_with(model: [@live_stream, @live_stream.messages.build], data: { controller: "form", action: "turbo:submit-end->form#reset" }) do |form| %>
-      <%= form.text_field :body, class: "border border-gray-400 rounded w-full", autocomplete: "off", required: true %>
+      <%= form.text_field :body, class: "border border-purple-400 rounded w-full", autocomplete: "off", required: true %>
     <% end %>
   </div>
 </div>

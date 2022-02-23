@@ -1,8 +1,12 @@
 <div class=" w-1/5 h-full max-h-screen overflow-y-auto flex flex-col gap flex-grow bg-gray-100">
-  <div class="p-4 flex flex-col gap-4">
+  <div class="p-4 flex flex-col gap-2">
     <% @recommended_live_streams.each do |live_stream| %>
-      <%= link_to live_stream, class: "bg-gray-300 p-4 rounded" do %>
-      <%= live_stream.name %>
+      <% base_classes = "hover:bg-gray-200 transition flex flex-col px-4 py-2 rounded" %>
+      <% classes = class_names(base_classes, { "bg-purple-900 hover:bg-purple-700" => current_page?(live_stream_path(live_stream)) }) %>
+      <% currently_watching = "#{number_to_human(rand(10000),format:'%n%u',units:{thousand:'K',million:'M',billion:'B'})} watching" %>
+      <%= link_to live_stream, class: classes do %>
+        <%= tag.span(live_stream.name, class: class_names("font-bold", "text-gray-700" => !current_page?(live_stream_path(live_stream)), "text-purple-50" => current_page?(live_stream_path(live_stream)))) %>
+        <%= tag.span(currently_watching, class: class_names("text-sm", "text-gray-500" => !current_page?(live_stream_path(live_stream)), "text-purple-200" => current_page?(live_stream_path(live_stream)))) %>
       <% end %>
     <% end %>
   </div>

@@ -1,18 +1,25 @@
-<main class=" flex flex-row h-screen">
+<nav class="h-20 p-4 flex gap-8 justify-between items-center">
+  <span class="text-4xl">🎥🦆</span>
+  <div class="flex gap-4">
+    <input type="search" class="bg-white border-purple-400 rounded" placeholder="Search">
+    <button class="px-4 py-2 bg-purple-900 text-sm text-white font-mono uppercase tracking-widest rounded">Sign up</button>
+    <button class="px-4 py-2 bg-purple-50 text-sm text-purple-900 font-mono uppercase tracking-widest rounded">Log in</button>
+  </div>
+</nav>
+<main class=" flex flex-row" style="height: calc(100vh - 5rem)">
   <%= render 'recommended_live_streams' %>
-
   <div class=" w-3/5 max-h-screen overflow-y-auto">
-    <div class="p-4">
+    <div class="p-4 pt-0">
       <iframe
         class="aspect-video w-full"
-        style="height: 80vh;"
+        style="height: 70vh;"
         src=<%= @live_stream.url %>
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope;"
         allowfullscreen></iframe>
     </div>
     <div class="p-4">
-      <h2>Products</h2>
+      <h2 class="text-purple-800 text-lg font-bold uppercase tracking-widest font-mono">Products</h2>
       <%= turbo_frame_tag "live_stream_products", src: live_stream_products_path(@live_stream) do %>
         <%= render partial: "products/products_skeleton" %>
       <% end %>
